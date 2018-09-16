@@ -1,0 +1,81 @@
+﻿@model IEnumerable<ProyectoP9.Models.Vehiculos>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.placa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.marca)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.año_creacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cilindros)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad_llantas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.motor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cliente.nit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ubicacion1.Direccion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.placa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.marca)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modelo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.año_creacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cilindros)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad_llantas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.motor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente.nit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ubicacion1.Direccion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_vehiculo }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_vehiculo }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_vehiculo })
+        </td>
+    </tr>
+}
+
+</table>

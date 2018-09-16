@@ -1,0 +1,90 @@
+﻿@model ProyectoP9.Models.Vehiculos
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Vehiculos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.placa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.placa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.marca)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.marca)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.año_creacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.año_creacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cilindros)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cilindros)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidad_llantas)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad_llantas)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.motor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.motor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cliente.nit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cliente.nit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ubicacion1.Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ubicacion1.Direccion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id_vehiculo }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

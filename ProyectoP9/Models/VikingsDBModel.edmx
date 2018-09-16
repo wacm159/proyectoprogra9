@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VikingsProyecModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nit" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="primer_nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="segundo_nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="primer_apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="segundo_apellido" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telefono" Type="int" Nullable="false" />
+          <Property Name="email" Type="nchar" MaxLength="50" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="numero_poliza" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Total">
+          <Key>
+            <PropertyRef Name="id_total" />
+          </Key>
+          <Property Name="id_total" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vehiculo" Type="int" Nullable="false" />
+          <Property Name="total" Type="int" />
+        </EntityType>
+        <EntityType Name="Ubicacion">
+          <Key>
+            <PropertyRef Name="id_ubicacion" />
+          </Key>
+          <Property Name="id_ubicacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Direccion" Type="nchar" MaxLength="40" />
+          <Property Name="departamento" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Vehiculos">
+          <Key>
+            <PropertyRef Name="id_vehiculo" />
+          </Key>
+          <Property Name="id_vehiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="placa" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="marca" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="modelo" Type="nchar" MaxLength="30" />
+          <Property Name="año_creacion" Type="int" Nullable="false" />
+          <Property Name="cilindros" Type="int" Nullable="false" />
+          <Property Name="cantidad_llantas" Type="int" Nullable="false" />
+          <Property Name="motor" Type="int" Nullable="false" />
+          <Property Name="id_cliente" Type="int" Nullable="false" />
+          <Property Name="ubicacion" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Total_Vehiculos">
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
+          <End Role="Total" Type="Self.Total" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="id_vehiculo" />
+            </Principal>
+            <Dependent Role="Total">
+              <PropertyRef Name="vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehiculos_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="Vehiculos">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehiculos_Ubicacion">
+          <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="1" />
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ubicacion">
+              <PropertyRef Name="id_ubicacion" />
+            </Principal>
+            <Dependent Role="Vehiculos">
+              <PropertyRef Name="ubicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VikingsProyecModelStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Total" EntityType="Self.Total" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Total_Vehiculos" Association="Self.FK_Total_Vehiculos">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="Total" EntitySet="Total" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculos_Cliente" Association="Self.FK_Vehiculos_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculos_Ubicacion" Association="Self.FK_Vehiculos_Ubicacion">
+            <End Role="Ubicacion" EntitySet="Ubicacion" />
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VikingsProyecModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="id_cliente" />
+          </Key>
+          <Property Name="id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nit" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="primer_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="segundo_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="primer_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="segundo_apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telefono" Type="Int32" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="direccion" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="numero_poliza" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Vehiculos" Relationship="Self.FK_Vehiculos_Cliente" FromRole="Cliente" ToRole="Vehiculos" />
+        </EntityType>
+        <EntityType Name="Total">
+          <Key>
+            <PropertyRef Name="id_total" />
+          </Key>
+          <Property Name="id_total" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vehiculo" Type="Int32" Nullable="false" />
+          <Property Name="total1" Type="Int32" />
+          <NavigationProperty Name="Vehiculos" Relationship="Self.FK_Total_Vehiculos" FromRole="Total" ToRole="Vehiculos" />
+        </EntityType>
+        <EntityType Name="Ubicacion">
+          <Key>
+            <PropertyRef Name="id_ubicacion" />
+          </Key>
+          <Property Name="id_ubicacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Direccion" Type="String" MaxLength="40" FixedLength="true" Unicode="true" />
+          <Property Name="departamento" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Vehiculos" Relationship="Self.FK_Vehiculos_Ubicacion" FromRole="Ubicacion" ToRole="Vehiculos" />
+        </EntityType>
+        <EntityType Name="Vehiculos">
+          <Key>
+            <PropertyRef Name="id_vehiculo" />
+          </Key>
+          <Property Name="id_vehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="placa" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="marca" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="modelo" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="año_creacion" Type="Int32" Nullable="false" />
+          <Property Name="cilindros" Type="Int32" Nullable="false" />
+          <Property Name="cantidad_llantas" Type="Int32" Nullable="false" />
+          <Property Name="motor" Type="Int32" Nullable="false" />
+          <Property Name="id_cliente" Type="Int32" Nullable="false" />
+          <Property Name="ubicacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK_Vehiculos_Cliente" FromRole="Vehiculos" ToRole="Cliente" />
+          <NavigationProperty Name="Total" Relationship="Self.FK_Total_Vehiculos" FromRole="Vehiculos" ToRole="Total" />
+          <NavigationProperty Name="Ubicacion1" Relationship="Self.FK_Vehiculos_Ubicacion" FromRole="Vehiculos" ToRole="Ubicacion" />
+        </EntityType>
+        <Association Name="FK_Vehiculos_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="id_cliente" />
+            </Principal>
+            <Dependent Role="Vehiculos">
+              <PropertyRef Name="id_cliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Total_Vehiculos">
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="1" />
+          <End Role="Total" Type="Self.Total" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculos">
+              <PropertyRef Name="id_vehiculo" />
+            </Principal>
+            <Dependent Role="Total">
+              <PropertyRef Name="vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehiculos_Ubicacion">
+          <End Role="Ubicacion" Type="Self.Ubicacion" Multiplicity="1" />
+          <End Role="Vehiculos" Type="Self.Vehiculos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ubicacion">
+              <PropertyRef Name="id_ubicacion" />
+            </Principal>
+            <Dependent Role="Vehiculos">
+              <PropertyRef Name="ubicacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VikingsProyecEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+          <EntitySet Name="Total" EntityType="Self.Total" />
+          <EntitySet Name="Ubicacion" EntityType="Self.Ubicacion" />
+          <EntitySet Name="Vehiculos" EntityType="Self.Vehiculos" />
+          <AssociationSet Name="FK_Vehiculos_Cliente" Association="Self.FK_Vehiculos_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Total_Vehiculos" Association="Self.FK_Total_Vehiculos">
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+            <End Role="Total" EntitySet="Total" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculos_Ubicacion" Association="Self.FK_Vehiculos_Ubicacion">
+            <End Role="Ubicacion" EntitySet="Ubicacion" />
+            <End Role="Vehiculos" EntitySet="Vehiculos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VikingsProyecModelStoreContainer" CdmEntityContainer="VikingsProyecEntities">
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="VikingsProyecModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="nit" ColumnName="nit" />
+                <ScalarProperty Name="primer_nombre" ColumnName="primer_nombre" />
+                <ScalarProperty Name="segundo_nombre" ColumnName="segundo_nombre" />
+                <ScalarProperty Name="primer_apellido" ColumnName="primer_apellido" />
+                <ScalarProperty Name="segundo_apellido" ColumnName="segundo_apellido" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="numero_poliza" ColumnName="numero_poliza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Total">
+            <EntityTypeMapping TypeName="VikingsProyecModel.Total">
+              <MappingFragment StoreEntitySet="Total">
+                <ScalarProperty Name="id_total" ColumnName="id_total" />
+                <ScalarProperty Name="vehiculo" ColumnName="vehiculo" />
+                <ScalarProperty Name="total1" ColumnName="total" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ubicacion">
+            <EntityTypeMapping TypeName="VikingsProyecModel.Ubicacion">
+              <MappingFragment StoreEntitySet="Ubicacion">
+                <ScalarProperty Name="id_ubicacion" ColumnName="id_ubicacion" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehiculos">
+            <EntityTypeMapping TypeName="VikingsProyecModel.Vehiculos">
+              <MappingFragment StoreEntitySet="Vehiculos">
+                <ScalarProperty Name="id_vehiculo" ColumnName="id_vehiculo" />
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="año_creacion" ColumnName="año_creacion" />
+                <ScalarProperty Name="cilindros" ColumnName="cilindros" />
+                <ScalarProperty Name="cantidad_llantas" ColumnName="cantidad_llantas" />
+                <ScalarProperty Name="motor" ColumnName="motor" />
+                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
